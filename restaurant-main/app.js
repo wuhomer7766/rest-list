@@ -14,12 +14,12 @@ app.use(express.static('public'))
 //******* */
 
 const mongoose = require('mongoose') // 載入 mongoose
-mongoose.connect("mongodb://localhost/todo-list", {
+mongoose.connect("mongodb://localhost/restaurant-list", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-const Restaurant = require("./models/restaurant.js");
+const Restaurant = require("./models/restaurant");
 
 // 取得資料庫連線狀態
 const db = mongoose.connection
@@ -33,12 +33,16 @@ db.once('open', () => {
 })
 
 
+//路由設定
 
-
-
+//設定根目錄首頁
 app.get('/', (req, res) => {
-  res.render('index', { restaurant: restaurantList.results })
+  Restaurant.find()
+    .lean()
+    .then( restaurant => res.render('index', {restaurant}))
+    .catch(error => console.log(error))
 })
+
 
 app.get('/restaurants/:restaurantId', (req, res) => {
   const restaurantChosen = restaurantList.results.find((restaurant) => {
