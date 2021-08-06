@@ -1,3 +1,4 @@
+
 <!-- search bar -->
 <div class="container search-bar">
   <div class="search-bar-outer">
@@ -20,11 +21,12 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
+      <div class="bottom-button" >
+          <a href="/new" class="btn btn-major" role="button">  建立新餐廳 </a> <!--這邊的路徑不能加"." -->
       <div class="card-columns">
-
         {{#each restaurant}}
 
-        <a href="/restaurants/{{this.id}}" class="text-secondary">
+        <a href="/restaurants/{{this._id}}" class="text-secondary">
           <div class="card mb-3">
             <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
             <div class="card-body p-3">
@@ -38,6 +40,9 @@
                 {{this.rating}}
                 <i class="fas fa-star fa-xs"></i>
               </span>
+              <form action="/restaurants/{{ this._id }}?_method=DELETE" method="POST"    style="display: inline;">
+                  <button type="submit">delete</button>
+              </form>
 
             </div>
           </div>
@@ -46,10 +51,8 @@
         {{/each}}
 
 
-
-
-
       </div>
     </div>
   </div>
 </div>
+

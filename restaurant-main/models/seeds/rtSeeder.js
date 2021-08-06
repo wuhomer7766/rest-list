@@ -14,7 +14,7 @@ db.on("error", () => {
 });
 // 連線成功
 db.once("open", () => {
-  for (let i=0 ; i < restaurantList.length; i++) {
+  for (let i=0 ; i < rt.length; i++) {
     rt.create({
       name: restaurantList[i].name,
       name_en: restaurantList[i].name_en,
