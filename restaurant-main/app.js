@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 3000;
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const Restaurant = require("./models/restaurant");
@@ -28,7 +28,9 @@ const restaurantList = require("./restaurant.json");
 
 
 const mongoose = require('mongoose') // 載入 mongoose
-mongoose.connect("mongodb://localhost/restaurant-list", {
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/restaurant-list";
+
+mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -154,6 +156,6 @@ app.get('/search', (req, res) => {
   res.render('index', { restaurant: restaurantFilter, keyword: keyword, })
 })
 
-app.listen(port, () => {
-  console.log(`the web is running http://localhost:${port}`)
+app.listen(PORT, () => {
+  console.log(`the web is running http://localhost:${PORT}`)
 })
